@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goolson 谷神 — Medical Concierge | Another Option. Another Hope.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   GOOLSON — Mayo Clinic-inspired layout
+   Brand colors editable below
+   ============================================================ */
+:root {
+  --green-deep: #1F3D2F;
+  --green-main: #2A6B4A;
+  --green-mid: #3D8F65;
+  --green-light: #5DB88A;
+  --green-pale: #E8EFEA;
+  --gold: #A88A56;
+  --gold-light: #C9AC78;
+  --ink: #1A1815;
+  --ink-soft: #4A453E;
+  --gray: #847C70;
+  --line: #DDD8CE;
+  --cream: #F7F4ED;
+  --white: #FDFCF9;
+
+  --serif: 'Newsreader', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+  --sans: 'DM Sans', 'Noto Sans SC', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 4px; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(247,244,237,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.brand { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+.brand-mark {
+  width: 46px; height: 46px; flex-shrink: 0;
+  background: var(--green-main);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 700; font-size: 1.6rem; color: var(--white);
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--green-deep); letter-spacing: 0.02em; }
+.brand-sub { font-size: 0.62rem; color: var(--gold); letter-spacing: 0.22em; font-weight: 600; }
+
+.nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+.nav-links > li > a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-links > li > a:hover { color: var(--green-main); }
+
+.nav-actions { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+.nav-cta {
+  background: var(--green-main);
+  color: var(--white);
+  padding: 0.7rem 1.4rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--green-deep); }
+
+.lang-wrap { position: relative; }
+.lang-toggle {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: none; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: 0.9rem; font-weight: 500; color: var(--ink);
+}
+.lang-menu {
+  position: absolute; top: 130%; right: 0;
+  background: var(--white); border: 1px solid var(--line); border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1); padding: 0.4rem; min-width: 150px;
+  opacity: 0; visibility: hidden; transform: translateY(-6px); transition: all 0.2s; z-index: 1001;
+}
+.lang-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+.lang-menu div { padding: 0.5rem 0.8rem; border-radius: 5px; font-size: 0.88rem; cursor: pointer; transition: background 0.15s; }
+.lang-menu div:hover { background: var(--green-pale); }
+.lang-menu div.active { color: var(--green-main); font-weight: 600; }
+
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+.nav-toggle span { display: block; width: 26px; height: 2px; background: var(--green-deep); margin: 6px 0; transition: 0.3s; }
+
+/* ============================================================
+   HERO with video
+   ============================================================ */
+.hero { position: relative; min-height: 88vh; overflow: hidden; background: var(--green-deep); }
+.hero video, .hero-fallback {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.hero-fallback {
+  background: url('hero-forest.jpg') center/cover no-repeat;
+}
+.hero-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(26,24,21,0.82) 0%, rgba(31,61,47,0.55) 50%, rgba(31,61,47,0.18) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2; max-width: 1340px; margin: 0 auto; padding: 7rem 2rem 5rem;
+  min-height: 88vh; display: flex; flex-direction: column; justify-content: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 1rem;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--gold-light);
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.9s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hero-eyebrow-rule {
+  width: 36px; height: 1px; background: var(--gold); opacity: 0.7;
+}
+.hero-title {
+  font-family: var(--serif); font-weight: 500; color: var(--white);
+  font-size: clamp(3rem, 6.6vw, 5.6rem); line-height: 1; max-width: 18ch;
+  letter-spacing: -0.022em;
+  opacity: 0; animation: fadeUp 1s 0.25s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hero-title .line { display: block; }
+.hero-title .italic {
+  font-style: normal; font-weight: 400; color: var(--gold-light);
+}
+html[lang="zh-CN"] .hero-title, html[lang="zh"] .hero-title {
+  font-family: 'Noto Serif SC', 'Newsreader', serif;
+  font-weight: 500; letter-spacing: 0.02em;
+}
+html[lang="zh-CN"] .hero-title .italic, html[lang="zh"] .hero-title .italic {
+  font-style: normal;
+}
+.hero-tag {
+  margin-top: 1.5rem;
+  font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  color: var(--gold-light); letter-spacing: 0.05em;
+  opacity: 0; animation: fadeUp 0.9s 0.45s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+/* 中文界面下 slogan 用宋体正体 */
+html[lang="zh-CN"] .hero-tag, html[lang="zh"] .hero-tag {
+  font-family: var(--serif); font-style: normal; letter-spacing: 0.08em; font-weight: 500;
+}
+.hero-body {
+  position: relative;
+  margin-top: 2.5rem; padding-left: 1.5rem;
+  max-width: 52ch;
+  color: rgba(255,255,255,0.85); font-size: clamp(1rem, 1.3vw, 1.15rem);
+  font-weight: 300; line-height: 1.7;
+  border-left: 1px solid rgba(255,255,255,0.25);
+  opacity: 0; animation: fadeUp 0.9s 0.65s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hero-body-em { color: var(--white); font-weight: 400; }
+
+.hero-actions {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-top: 2.8rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.9s 0.85s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.btn-pill {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  padding: 1rem 2rem; border-radius: 100px;
+  font-size: 0.92rem; font-weight: 600; letter-spacing: 0.04em;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer; border: 1.5px solid transparent;
+  position: relative; overflow: hidden;
+}
+.btn-pill svg { transition: transform 0.3s; }
+.btn-pill:hover svg { transform: translateX(4px); }
+.btn-solid { background: var(--white); color: var(--green-deep); }
+.btn-solid:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(0,0,0,0.25); }
+.btn-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.45); }
+.btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+.hero-play {
+  position: absolute; bottom: 2.5rem; right: 2.5rem; z-index: 3;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.55);
+  backdrop-filter: blur(10px); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.hero-play:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); border-color: var(--white); }
+
+/* Hero footer strip */
+.hero-foot-strip {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+  padding: 1.8rem 2rem;
+  border-top: none;
+  background: transparent;
+  display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  opacity: 0; animation: fadeIn 1s 1.1s ease forwards;
+}
+.hero-foot-strip .stats { display: flex; gap: 2.5rem; }
+.hero-foot-strip strong { color: var(--gold-light); font-weight: 600; font-size: 0.92rem; margin-right: 0.4rem; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ============================================================
+   SECTION SCAFFOLD
+   ============================================================ */
+section { scroll-margin-top: 100px; }
+.wrap { max-width: 1340px; margin: 0 auto; padding: 0 2rem; }
+.section-pad { padding: 5.5rem 0; }
+.eyebrow {
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--green-mid); margin-bottom: 1rem;
+}
+.h2 {
+  font-family: var(--serif); font-weight: 600; color: var(--green-deep);
+  font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.12; letter-spacing: -0.01em;
+}
+.lead { font-size: 1.1rem; color: var(--ink-soft); font-weight: 300; line-height: 1.7; }
+
+/* ============================================================
+   SEARCH STRIP (like Mayo's find by letter)
+   ============================================================ */
+.search-strip { background: #F2EDE2; border-bottom: 1px solid var(--line); padding: 3rem 0; }
+.search-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.search-box { position: relative; }
+.search-box label { display: block; font-family: var(--serif); font-size: 1.5rem; color: var(--green-deep); margin-bottom: 1rem; }
+.search-field { position: relative; }
+.search-field input {
+  width: 100%; padding: 1.1rem 1.2rem 1.1rem 3.2rem; font-size: 1.05rem; font-family: var(--sans);
+  border: 1.5px solid var(--line); border-radius: 100px; outline: none; transition: border 0.2s; background: var(--white);
+}
+.search-field input:focus { border-color: var(--green-main); }
+.search-field svg { position: absolute; left: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--gray); }
+.dept-quick { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
+.dept-chip {
+  padding: 0.45rem 1rem; border: 1px solid var(--line); border-radius: 100px; background: var(--white);
+  font-size: 0.85rem; color: var(--ink-soft); cursor: pointer; transition: all 0.2s; font-family: var(--sans);
+}
+.dept-chip:hover { border-color: var(--green-main); color: var(--green-main); }
+.search-aside { font-family: var(--serif); }
+.search-aside h3 { font-size: 1.9rem; color: var(--green-deep); font-weight: 600; line-height: 1.2; margin-bottom: 0.8rem; }
+.search-aside p { font-family: var(--sans); color: var(--ink-soft); font-weight: 300; }
+
+/* ============================================================
+   CHINA MEDICAL INTRO — alternating image/text
+   ============================================================ */
+.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.feature-row + .feature-row { margin-top: 5rem; }
+.feature-row.flip .feature-media { order: 2; }
+.feature-media { border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; box-shadow: 0 20px 50px rgba(11,61,46,0.12); }
+.feature-media img { width: 100%; height: 100%; object-fit: cover; }
+.feature-text h3 { font-family: var(--serif); font-size: clamp(1.6rem, 2.6vw, 2.2rem); color: var(--green-deep); font-weight: 600; margin-bottom: 1rem; line-height: 1.2; }
+.feature-text p { color: var(--ink-soft); font-weight: 300; font-size: 1.05rem; margin-bottom: 1rem; }
+.feature-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--green-main); font-weight: 600; margin-top: 0.5rem; }
+.feature-link svg { transition: transform 0.2s; }
+.feature-link:hover svg { transform: translateX(4px); }
+
+/* ============================================================
+   HOSPITALS SHOWCASE — Mayo locations style cards
+   ============================================================ */
+.hosp-section { background: #F2EDE2; }
+.hosp-head { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem; align-items: end; margin-bottom: 3rem; }
+.hosp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.hosp-card {
+  position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 4/3.2; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(11,61,46,0.1);
+  opacity: 0; transform: translateY(20px);
+  animation: cardIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s;
+}
+.hosp-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px -12px rgba(11,61,46,0.25); }
+.hosp-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+.hosp-card:hover img { transform: scale(1.08); }
+.hosp-card::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.35) 28%, transparent 50%); pointer-events: none; }
+.hosp-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; z-index: 2; color: var(--white); text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+.hosp-info h4 { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; }
+.hosp-info .specs { font-size: 0.82rem; color: rgba(255,255,255,0.82); margin-top: 0.4rem; font-weight: 300; letter-spacing: 0.01em; }
+.hosp-more { text-align: center; margin-top: 3rem; }
+@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+/* hospital teaser on home page */
+.hosp-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hosp-teaser-text .h2 { margin-top: 0.4rem; }
+.hosp-teaser-text .lead { margin: 1.4rem 0 2rem; }
+.hosp-teaser-btn { display: inline-flex; }
+.hosp-teaser-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.hosp-teaser-grid img { width: 100%; aspect-ratio: 4/3.4; object-fit: cover; border-radius: 10px; box-shadow: 0 10px 30px rgba(11,61,46,0.14); }
+.hosp-teaser-grid img:nth-child(1) { margin-top: 1.6rem; }
+.hosp-teaser-grid img:nth-child(4) { margin-top: -1.6rem; }
+@media (max-width: 860px) {
+  .hosp-teaser { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hosp-teaser-grid img:nth-child(n) { margin-top: 0; }
+}
+
+/* three cities block in About */
+.cities { margin-top: 5.5rem; padding-top: 4.5rem; border-top: 1px solid var(--line); }
+.cities-head { max-width: 620px; margin-bottom: 3rem; }
+.cities-head h3 { margin-top: 0.4rem; }
+.cities-head .lead { margin-top: 1rem; }
+.cities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+.city-card { padding-top: 1.6rem; border-top: 2px solid var(--gold); }
+.city-name { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
+.city-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.city-card h4 { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; color: var(--green-deep); }
+.city-card p { font-size: 0.95rem; font-weight: 300; line-height: 1.75; color: var(--gray); }
+@media (max-width: 820px) {
+  .cities-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .cities { margin-top: 4rem; padding-top: 3rem; }
+}
+
+/* ============================================================
+   CARE AREAS — Mayo's featured list
+   ============================================================ */
+.care-grid { display: grid; grid-template-columns: 0.8fr 1fr 1fr; gap: 2.5rem 4rem; }
+.care-list { list-style: none; }
+.care-list li { border-top: 1px solid var(--line); }
+.care-list li:last-child { border-bottom: 1px solid var(--line); }
+.care-list a { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; color: var(--green-main); font-weight: 500; font-size: 1.05rem; transition: padding 0.2s; }
+.care-list a:hover { padding-left: 0.5rem; }
+
+/* ============================================================
+   CTA BANNER
+   ============================================================ */
+.cta-band { background: linear-gradient(120deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--green-deep); }
+.cta-band .btn-pill.btn-solid { background: var(--green-deep); color: var(--cream); }
+.cta-band .btn-pill.btn-solid:hover { background: var(--ink); box-shadow: 0 12px 32px -8px rgba(31,61,47,0.4); }
+.cta-band svg { stroke: var(--green-deep) !important; }
+.cta-band .wrap { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-top: 4rem; padding-bottom: 4rem; flex-wrap: wrap; }
+.cta-band-text { display: flex; align-items: center; gap: 1.5rem; }
+.cta-band h3 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 500; max-width: 18ch; line-height: 1.2; }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.form-field { margin-bottom: 1.3rem; }
+.form-field label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 0.4rem; }
+.form-field input, .form-field select, .form-field textarea {
+  width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--line); border-radius: 6px;
+  font-family: var(--sans); font-size: 0.95rem; outline: none; transition: border 0.2s; background: var(--white);
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--green-main); }
+.form-field textarea { resize: vertical; min-height: 110px; }
+.form-submit { width: 100%; padding: 1rem; background: var(--green-main); color: var(--white); border: none; border-radius: 6px; font-family: var(--sans); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.form-submit:hover { background: var(--green-deep); }
+.channels { display: flex; flex-direction: column; gap: 1rem; }
+.channel { display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.3rem; border: 1px solid var(--line); border-radius: 10px; transition: all 0.2s; }
+.channel:hover { border-color: var(--green-light); background: var(--cream); }
+.channel-ic { width: 42px; height: 42px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.channel-name { font-weight: 600; font-size: 0.95rem; }
+.channel-handle { font-size: 0.82rem; color: var(--gray); }
+
+/* ============================================================
+   FOOTER — Mayo dark mega footer
+   ============================================================ */
+.footer { background: var(--green-deep); color: rgba(255,255,255,0.75); padding: 4rem 0 2rem; }
+.footer-top { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.footer-brand .brand-name { color: var(--white); }
+.footer-brand p { font-size: 0.88rem; margin-top: 1rem; max-width: 32ch; font-weight: 300; }
+.footer-col h5 { color: var(--white); font-size: 0.95rem; font-weight: 600; margin-bottom: 1rem; font-family: var(--serif); }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.7rem; }
+.footer-col a { font-size: 0.88rem; transition: color 0.2s; }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; font-size: 0.8rem; flex-wrap: wrap; gap: 1rem; }
+.footer-disclaimer { max-width: 60ch; line-height: 1.5; }
+
+/* ============================================================
+   JOURNEY — four-step service process
+   ============================================================ */
+.journey-section { background: var(--green-deep); color: var(--cream); }
+.journey-section .eyebrow { color: var(--gold-light); }
+.journey-section .h2 { color: var(--white); }
+.journey-head { max-width: 560px; margin-bottom: 4rem; }
+.journey-head .lead { color: rgba(255,255,255,0.7); margin-top: 1.2rem; }
+.journey-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; position: relative; }
+.journey-grid::before {
+  content: ''; position: absolute; top: 27px; left: 28px; right: 28px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,172,120,0.45) 8%, rgba(201,172,120,0.45) 92%, transparent);
+}
+.journey-step { position: relative; }
+.journey-num {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--green-deep); border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Newsreader', Georgia, serif; font-style: italic;
+  font-size: 1.35rem; color: var(--gold-light);
+  margin-bottom: 1.6rem; position: relative; z-index: 1;
+}
+.journey-step h4 { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--white); margin-bottom: 0.7rem; }
+.journey-step p { font-size: 0.93rem; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.7; max-width: 30ch; }
+@media (max-width: 980px) {
+  .journey-grid { grid-template-columns: 1fr 1fr; gap: 3rem 2rem; }
+  .journey-grid::before { display: none; }
+}
+@media (max-width: 600px) {
+  .journey-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   A11Y
+   ============================================================ */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) {
+  .nav-links, .nav-actions .nav-cta { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+    position: absolute; top: 88px; left: 0; right: 0; background: var(--white);
+    border-bottom: 1px solid var(--line); padding: 1rem 2rem; box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+  .nav-links.open li { width: 100%; }
+  .nav-links.open li a { display: block; padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+  .search-grid, .feature-row, .feature-row.flip .feature-media, .hosp-head, .care-grid, .contact-grid, .footer-top { grid-template-columns: 1fr; }
+  .feature-row.flip .feature-media { order: 0; }
+  .hosp-grid { grid-template-columns: 1fr 1fr; }
+  .care-grid { gap: 0; }
+  .footer-top { gap: 2rem; }
+}
+@media (max-width: 600px) {
+  .wrap, .nav-inner { padding: 0 1.3rem; }
+  .hosp-grid { grid-template-columns: 1fr; }
+  .section-pad { padding: 3.5rem 0; }
+  .hero { height: 70vh; }
+}
+</style>
+
+<style>
+.hp-hero { padding: calc(var(--nav-h) + 4rem) 0 3rem; background: linear-gradient(180deg, #F2EDE2 0%, var(--cream) 100%); }
+.hp-title { font-family: var(--serif); font-weight: 600; font-size: clamp(2.4rem, 5vw, 4rem); color: var(--green-deep); line-height: 1.05; margin: 0.5rem 0 1.2rem; letter-spacing: -0.01em; }
+.hp-sub { max-width: 620px; font-size: 1.08rem; font-weight: 300; line-height: 1.7; color: var(--gray); }
+.hp-search { position: relative; max-width: 560px; margin: 2.4rem 0 1.2rem; display: flex; align-items: center; }
+.hp-search svg { position: absolute; left: 1.1rem; color: var(--green-main); pointer-events: none; }
+.hp-search input { width: 100%; padding: 1.1rem 1.3rem 1.1rem 3.1rem; border: 1px solid var(--line); border-radius: 999px; font-family: var(--sans); font-size: 1rem; background: #fff; color: var(--ink); transition: border-color 0.2s, box-shadow 0.2s; }
+.hp-search input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(201,172,120,0.15); }
+.hp-chips { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.hp-list-sec { padding: 3rem 0 5rem; }
+.hp-count { font-size: 0.9rem; color: var(--gray); margin-bottom: 1.6rem; font-weight: 400; }
+.hp-list-sec .hosp-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1100px){ .hp-list-sec .hosp-grid { grid-template-columns: repeat(3,1fr);} }
+@media (max-width: 760px){ .hp-list-sec .hosp-grid { grid-template-columns: repeat(2,1fr);} }
+@media (max-width: 480px){ .hp-list-sec .hosp-grid { grid-template-columns: 1fr;} }
+.cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.cta-inner h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.5rem,3vw,2.1rem); }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark" aria-label="Goolson logo">谷</span>
+      <span class="brand-text">
+        <span class="brand-name">GOOLSON</span>
+        <span class="brand-sub">MEDICAL CONCIERGE</span>
+      </span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about" data-i18n="nav_about">关于我们</a></li>
+      <li><a href="index.html#china" data-i18n="nav_china">中国医疗</a></li>
+      <li><a href="hospitals.html" data-i18n="nav_hospitals">合作医院</a></li>
+      <li><a href="index.html#care" data-i18n="nav_care">重点科室</a></li>
+      <li><a href="index.html#contact" data-i18n="nav_contact">联系我们</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="lang-wrap">
+        <button class="lang-toggle" onclick="toggleLang()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+          <span id="langLabel">中文</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <div class="active" onclick="setLang('zh')">🇨🇳 中文</div>
+          <div onclick="setLang('en')">🇬🇧 English</div>
+          <div onclick="setLang('fr')">🇫🇷 Français</div>
+          <div onclick="setLang('de')">🇩🇪 Deutsch</div>
+          <div onclick="setLang('ru')">🇷🇺 Русский</div>
+        </div>
+      </div>
+      <a href="index.html#contact" class="nav-cta" data-i18n="nav_cta">预约咨询</a>
+    </div>
+
+    <button class="nav-toggle" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="hp-hero">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="hp_eyebrow">合作医院</div>
+    <h1 class="hp-title" data-i18n="hp_title">找到对的医院</h1>
+    <p class="hp-sub" data-i18n="hp_sub">广州 · 佛山 · 珠海，20 家顶尖三甲医院。按疾病、科室或医院名称查找最适合您的选择。</p>
+    <div class="hp-search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="hpSearch" data-i18n-ph="search_ph" placeholder="输入疾病、科室或医院名称…" oninput="filterHosp(this.value)">
+    </div>
+    <div class="hp-chips">
+      <span class="dept-chip" onclick="chip('肿瘤')" data-i18n="chip_onco">肿瘤</span>
+      <span class="dept-chip" onclick="chip('心血管')" data-i18n="chip_cardio">心血管</span>
+      <span class="dept-chip" onclick="chip('骨科')" data-i18n="chip_ortho">骨科</span>
+      <span class="dept-chip" onclick="chip('眼科')" data-i18n="chip_eye">眼科</span>
+      <span class="dept-chip" onclick="chip('中医')" data-i18n="chip_tcm">中医</span>
+      <span class="dept-chip" onclick="chip('生殖')" data-i18n="chip_fertility">生殖医学</span>
+    </div>
+  </div>
+</section>
+<section class="hp-list-sec">
+  <div class="wrap">
+    <p class="hp-count" id="hpCount"></p>
+    <div class="hosp-grid" id="hospGrid"></div>
+  </div>
+</section>
+<div class="cta-band">
+  <div class="wrap cta-inner">
+    <h2 data-i18n="cta_h">让您的就医之旅，从这里安心启程</h2>
+    <a href="index.html#contact" class="btn-pill btn-solid" data-i18n="cta_btn">免费咨询</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand-name" style="font-family:var(--serif);font-size:1.4rem;font-weight:700">GOOLSON 谷神</span>
+        <p data-i18n="foot_brand">连接世界与中国的优质医疗。从咨询到康复，全程陪伴。</p>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="foot_service">服务</h5>
+        <ul>
+          <li><a href="index.html#about" data-i18n="nav_about">关于我们</a></li>
+          <li><a href="hospitals.html" data-i18n="nav_hospitals">合作医院</a></li>
+          <li><a href="index.html#care" data-i18n="nav_care">重点科室</a></li>
+          <li><a href="index.html#contact" data-i18n="nav_contact">联系我们</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="foot_patients">患者支持</h5>
+        <ul>
+          <li><a href="index.html#contact" data-i18n="foot_appt">预约咨询</a></li>
+          <li><a href="index.html#contact" data-i18n="foot_visa">签证协助</a></li>
+          <li><a href="index.html#contact" data-i18n="foot_translate">病历翻译</a></li>
+          <li><a href="index.html#contact" data-i18n="foot_followup">术后随访</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="foot_connect">关注我们</h5>
+        <ul>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#" data-i18n="ch_wechat">微信 WeChat</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-disclaimer" data-i18n="foot_disclaimer">© 2026 Goolson 谷神。本平台提供医疗信息整理、就医协助与医患沟通服务，不提供诊断或治疗意见。所有医学判断均由执业医师做出。</span>
+      <span>Guangzhou, China</span>
+    </div>
+  </div>
+</footer>
+<script>
+/* ============================================================
+   HOSPITAL DATA — edit here
+   ============================================================ */
+const HOSPITALS = [
+  { name:"广东省人民医院", nameEn:"Guangdong Provincial People's Hospital", specs:"心血管 · 心脏外科 · 肺癌中心", specsEn:"Cardiology · Cardiac Surgery · Lung Cancer", tags:["心血管","cardio","肿瘤","oncology"], img:"hospitals/gdph.jpg" },
+  { name:"广东省妇幼保健院", nameEn:"Guangdong Women and Children Hospital", specs:"生殖医学 · 产前诊断 · 妇科肿瘤", specsEn:"Reproductive Medicine · Prenatal Dx · GynOnc", tags:["生殖","fertility","儿科","pediatrics"], img:"hospitals/gdwch.jpg" },
+  { name:"中山大学附属第一医院", nameEn:"The First Affiliated Hospital, SYSU", specs:"肾内科 · 肝胆外科 · 神经科", specsEn:"Nephrology · Hepatobiliary · Neurology", tags:["神经","neuro","肿瘤","oncology"], img:"hospitals/sysu-1.jpg" },
+  { name:"中山大学孙逸仙纪念医院", nameEn:"Sun Yat-sen Memorial Hospital", specs:"泌尿外科 · 乳腺外科 · 内分泌", specsEn:"Urology · Breast Surgery · Endocrinology", tags:["肿瘤","oncology","生殖","fertility"], img:"hospitals/sysu-memorial.jpg" },
+  { name:"中山大学附属第三医院", nameEn:"The Third Affiliated Hospital, SYSU", specs:"感染病 · 风湿免疫 · 肝病", specsEn:"Infectious Disease · Rheumatology · Hepatology", tags:["神经","neuro","中医","tcm"], img:"hospitals/sysu-3.png" },
+  { name:"中山大学中山眼科中心", nameEn:"Zhongshan Ophthalmic Center", specs:"眼科 · 全球最大 · 亚洲第一", specsEn:"Ophthalmology · World's largest · #1 Asia", tags:["眼科","eye","ophthalmology"], img:"hospitals/zoc.jpg" },
+  { name:"中山大学肿瘤防治中心", nameEn:"SYSU Cancer Center", specs:"肿瘤 · 鼻咽癌全球领先 · 放疗", specsEn:"Oncology · Global leader in NPC · Radiotherapy", tags:["肿瘤","oncology"], img:"hospitals/sysucc.jpg" },
+  { name:"中山大学附属口腔医院", nameEn:"Hospital of Stomatology, SYSU", specs:"口腔颌面外科 · 正畸 · 种植", specsEn:"Maxillofacial · Orthodontics · Implants", tags:["口腔","dental"], img:"hospitals/sysu-stomat.jpg" },
+  { name:"中山大学附属第六医院", nameEn:"The Sixth Affiliated Hospital, SYSU", specs:"结直肠外科 · 胃肠内科 · 生殖", specsEn:"Colorectal · Gastroenterology · Fertility", tags:["肿瘤","oncology","生殖","fertility"], img:"hospitals/sysu-6.jpg" },
+  { name:"南方医科大学南方医院", nameEn:"Nanfang Hospital, SMU", specs:"消化科 · 骨科 · 肾内科", specsEn:"Gastroenterology · Orthopedics · Nephrology", tags:["骨科","ortho","肿瘤","oncology"], img:"hospitals/nanfang.jpg" },
+  { name:"南方医科大学珠江医院", nameEn:"Zhujiang Hospital, SMU", specs:"神经外科 · 微创神外 · 儿科", specsEn:"Neurosurgery · Minimally Invasive · Pediatrics", tags:["神经","neuro","骨科","ortho"], img:"hospitals/zhujiang.jpg" },
+  { name:"暨南大学附属第一医院", nameEn:"First Affiliated Hospital, Jinan Univ.", specs:"骨科 · 介入放射 · 心血管", specsEn:"Orthopedics · Interventional Radiology · Cardiology", tags:["骨科","ortho","心血管","cardio","神经","neuro"], img:"hospitals/jnu-1.jpg" },
+  { name:"广东省中医院", nameEn:"Guangdong Provincial TCM Hospital", specs:"中医 · 针灸 · 中西医结合", specsEn:"TCM · Acupuncture · Integrative Medicine", tags:["中医","tcm","心血管","cardio"], img:"hospitals/gdtcm.jpg" },
+  { name:"广州医科大学附属第一医院", nameEn:"First Affiliated Hospital of GMU", specs:"呼吸科 · 钟南山院士领衔", specsEn:"Respiratory · Led by Acad. Zhong Nanshan", tags:["呼吸","肿瘤","oncology"], img:"hospitals/gmu-1.jpg" },
+  { name:"广州市第一人民医院", nameEn:"Guangzhou First People's Hospital", specs:"消化内科 · 老年病 · 泌尿外科", specsEn:"Gastroenterology · Geriatrics · Urology", tags:["心血管","cardio","骨科","ortho"], img:"hospitals/gzph.jpg" },
+  { name:"广州医科大学附属妇女儿童医疗中心", nameEn:"Guangzhou Women and Children's Center", specs:"儿童血液肿瘤 · 新生儿 · 小儿外科", specsEn:"Pediatric Oncology · Neonatology · Pediatric Surgery", tags:["儿科","pediatrics","生殖","fertility"], img:"hospitals/gzwcmc.jpg" },
+  { name:"广东祈福医院", nameEn:"Guangdong Clifford Hospital", specs:"中西医结合 · 自然疗法 · 肿瘤", specsEn:"Integrative Medicine · Naturopathy · Oncology", tags:["中医","tcm","肿瘤","oncology","生殖","fertility"], img:"hospitals/qifu.jpg" },
+  { name:"佛山复星禅诚医院", nameEn:"Foshan Fosun Chancheng Hospital", specs:"心血管 · 骨科 · 肿瘤", specsEn:"Cardiology · Orthopedics · Oncology", tags:["心血管","cardio","骨科","ortho","肿瘤","oncology"], img:"hospitals/foshan-fosun.jpg" },
+  { name:"中山大学附属第五医院", nameEn:"The Fifth Affiliated Hospital, SYSU", specs:"肿瘤 · 介入医学 · 核医学", specsEn:"Oncology · Interventional Medicine · Nuclear Medicine", tags:["肿瘤","oncology","心血管","cardio"], img:"hospitals/sysu-5.jpg" },
+  { name:"珠海市人民医院", nameEn:"Zhuhai People's Hospital", specs:"心血管 · 神经科 · 急危重症", specsEn:"Cardiology · Neurology · Critical Care", tags:["心血管","cardio","神经","neuro"], img:"hospitals/zhuhai-ph.jpg" },
+];
+
+const CARE = {
+  zh: ["肿瘤综合治疗","鼻咽癌","心脏瓣膜病","先天性心脏病","器官移植","骨与关节置换","脑肿瘤","生殖医学与试管婴儿","白内障与眼底病","中西医结合康复"],
+  en: ["Comprehensive Oncology","Nasopharyngeal Cancer","Heart Valve Disease","Congenital Heart Disease","Organ Transplant","Joint Replacement","Brain Tumor","IVF & Reproductive Medicine","Cataract & Retinal Disease","Integrated TCM Rehab"]
+};
+function renderCare() {
+  if(!document.getElementById('careCol1')) return;
+  const list = CARE[currentLang] || CARE.en;
+  const half = Math.ceil(list.length/2);
+  const arrow = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
+  document.getElementById('careCol1').innerHTML = list.slice(0,half).map(c=>`<li><a href="#contact">${c} ${arrow}</a></li>`).join('');
+  document.getElementById('careCol2').innerHTML = list.slice(half).map(c=>`<li><a href="#contact">${c} ${arrow}</a></li>`).join('');
+}
+
+/* ============================================================
+   i18n
+   ============================================================ */
+const I18N = {
+  zh: {
+    nav_about:"关于我们", nav_china:"中国医疗", nav_hospitals:"合作医院", nav_care:"重点科室", nav_contact:"联系我们", nav_cta:"预约咨询",
+    hero_eyebrow:"国际医疗专属管家 · GUANGZHOU",
+    hero_l1:"多一个选择，", hero_l2:"多一份希望。",
+    hero_tag:"为希望，找一条路。",
+    hero_p1:"当世界充满不确定，你的选择依然重要。",
+    hero_p2:"Goolson 为不愿将就的人，打开通向中国顶尖医疗的另一条路。",
+    hero_cta1:"预约咨询", hero_cta2:"了解我们 →",
+    foot_jci:"广佛珠合作医院", foot_lang:"服务语言", foot_resp:"国际响应", foot_scroll:"向下浏览 ↓",
+    search_label:"查找医院与科室", search_ph:"输入疾病、科室或医院名称…", aside_h:"精准匹配，安心就医", aside_p:"告诉我们您的需求，我们的医学顾问会为您匹配最合适的医院、科室与专家，并提供费用预估与就医方案。",
+    chip_onco:"肿瘤", chip_cardio:"心血管", chip_ortho:"骨科", chip_eye:"眼科", chip_tcm:"中医", chip_fertility:"生殖医学",
+    about_eyebrow:"为什么选择中国", about_h:"世界级医疗，触手可及的价格", about_p1:"中国华南地区拥有一批世界顶尖的三甲医院，配备国际前沿的诊疗设备与经验丰富的专家团队。在这里，您能以欧美50%-70%的费用，获得同等甚至更高水准的医疗服务。", about_p2:"从复杂肿瘤治疗到精密心脏手术，从器官移植到中西医结合康复，我们严选的20家广州、佛山、珠海顶尖三甲医院覆盖几乎所有专科领域。", about_link:"查看合作医院",
+    tcm_eyebrow:"独特优势", tcm_h:"不止于治疗，更是身心的疗愈", tcm_p1:"中国拥有数千年传承的中医智慧。在西医精准治疗之外，您还可体验中医调理、针灸理疗、药膳养生——一种独特的整体康复方式。", tcm_p2:"治疗间歇，我们为您安排岭南文化体验与广府美食探索，让就医之旅同时成为一段难忘的文化之旅。", tcm_link:"定制您的方案",
+    hosp_eyebrow:"合作医院", hosp_h:"广州 · 佛山 · 珠海<br>20 家顶尖三甲医院", hosp_p:"我们严选粤港澳大湾区实力雄厚的三甲医院，覆盖肿瘤、心血管、器官移植等重点专科。在独立页面中按疾病或科室快速查找最适合您的医院。", hosp_more:"找到对的医院 →",
+    hp_eyebrow:"合作医院", hp_title:"找到对的医院", hp_sub:"广州 · 佛山 · 珠海，20 家顶尖三甲医院。按疾病、科室或医院名称查找最适合您的选择。",
+    cities_eyebrow:"区位优势", cities_h:"大湾区，触手可及的医疗高地", cities_p:"广州、佛山、珠海同处粤港澳大湾区，高铁互联、一小时通达，让您在顶尖医疗资源之间从容选择。",
+    city_gz_t:"广州", city_gz_p:"华南医疗中枢。中山大学、南方医科、暨南大学等顶尖医学院云集，三甲医院数量与专科实力居全国前列，鼻咽癌、眼科、器官移植等领域享誉国际。",
+    city_fs_t:"佛山", city_fs_p:"紧邻广州，地铁直连。综合医疗实力雄厚，骨科、心血管等专科特色突出，就医节奏从容、费用更具优势。",
+    city_zh_t:"珠海", city_zh_p:"毗邻港澳的滨海花园城市。环境宜人、适合康复，医疗资源与港澳无缝衔接，是术后疗养与跨境就医的理想之选。",
+    care_eyebrow:"重点科室", care_h:"我们擅长应对<br>复杂的医疗挑战", care_p:"覆盖肿瘤、心脑血管、器官移植等高难度领域。",
+    journey_eyebrow:"服务流程", journey_h:"从第一次咨询，<br>到平安回家", journey_p:"每一步都有专属医学顾问陪伴，您只需专注于康复本身。",
+    j1_t:"免费咨询评估", j1_p:"提交病历资料，医学顾问48小时内完成初步评估，给出可行方向与费用预估。",
+    j2_t:"定制就医方案", j2_p:"匹配最合适的医院与专家，安排远程会诊，协助签证、机票与住宿。",
+    j3_t:"全程陪同就医", j3_p:"专属医疗翻译全程陪诊，协调检查、治疗与住院事务，家属同步知情。",
+    j4_t:"康复与随访", j4_p:"出院后整理完整病历译本，安排远程随访，与您的家庭医生无缝衔接。",
+    cta_h:"让您的就医之旅，从这里安心启程", cta_btn:"免费咨询",
+    contact_eyebrow:"联系我们", contact_h:"开始您的咨询", contact_p:"留下信息，我们的医学顾问将在24小时内与您联系。",
+    f_name:"姓名", f_name_ph:"您的姓名", f_contact:"邮箱 / WhatsApp", f_dept:"意向科室", f_dept_ph:"请选择", f_msg:"需求简述", f_msg_ph:"请简要描述您的病情或需求…", f_submit:"提交咨询",
+    ch_wechat:"微信 WeChat",
+    foot_brand:"连接世界与中国的优质医疗。从咨询到康复，全程陪伴。", foot_service:"服务", foot_patients:"患者支持", foot_appt:"预约咨询", foot_visa:"签证协助", foot_translate:"病历翻译", foot_followup:"术后随访", foot_connect:"关注我们",
+    foot_disclaimer:"© 2026 Goolson 谷神。本平台提供医疗信息整理、就医协助与医患沟通服务，不提供诊断或治疗意见。所有医学判断均由执业医师做出。"
+  },
+  en: {
+    nav_about:"About", nav_china:"Medical in China", nav_hospitals:"Hospitals", nav_care:"Care Areas", nav_contact:"Contact", nav_cta:"Request Consultation",
+    hero_eyebrow:"International Medical Concierge · GUANGZHOU",
+    hero_l1:"Another Option.", hero_l2:"Another Hope.",
+    hero_tag:"A Way to Hope.",
+    hero_p1:"When the world feels uncertain, your choice still matters.",
+    hero_p2:"Goolson opens a path to world-class care in China — for those who refuse to settle.",
+    hero_cta1:"Begin Inquiry", hero_cta2:"About Us →",
+    foot_jci:"Partner Hospitals", foot_lang:"Languages", foot_resp:"24/7 Response", foot_scroll:"Scroll ↓",
+    search_label:"Find a hospital or specialty", search_ph:"Enter a condition, department, or hospital…", aside_h:"The right match, with peace of mind", aside_p:"Tell us your needs and our medical advisors will match you with the right hospital, department, and expert — along with cost estimates and a care plan.",
+    chip_onco:"Oncology", chip_cardio:"Cardiology", chip_ortho:"Orthopedics", chip_eye:"Ophthalmology", chip_tcm:"TCM", chip_fertility:"Fertility",
+    about_eyebrow:"Why China", about_h:"World-class care at accessible prices", about_p1:"South China is home to top-tier hospitals equipped with cutting-edge technology and experienced specialists. Here you receive care of equal or higher standard at 50–70% of Western costs.", about_p2:"From complex cancer treatment to precision cardiac surgery, organ transplants to integrative recovery, our 20 carefully selected top-tier hospitals across Guangzhou, Foshan, and Zhuhai cover virtually every specialty.", about_link:"View partner hospitals",
+    tcm_eyebrow:"A Unique Advantage", tcm_h:"More than treatment — healing for body and mind", tcm_p1:"China offers thousands of years of Traditional Chinese Medicine wisdom. Beyond precise Western treatment, experience TCM therapy, acupuncture, and medicinal cuisine — a uniquely holistic path to recovery.", tcm_p2:"Between treatments, we arrange Lingnan cultural experiences and Cantonese culinary journeys, turning your medical trip into a memorable cultural one.", tcm_link:"Customize your plan",
+    hosp_eyebrow:"Partner Hospitals", hosp_h:"20 Leading Hospitals<br>in Guangzhou, Foshan & Zhuhai", hosp_p:"We partner with top-tier (Grade-A tertiary) hospitals across the Greater Bay Area, covering oncology, cardiovascular, organ transplant and more. Search by condition or specialty on a dedicated page to find your best match.", hosp_more:"Find the Right Hospital →",
+    hp_eyebrow:"Partner Hospitals", hp_title:"Find the Right Hospital", hp_sub:"Guangzhou · Foshan · Zhuhai — 20 leading hospitals. Search by condition, specialty, or hospital name to find your best match.",
+    cities_eyebrow:"Location", cities_h:"The Greater Bay Area — care within reach", cities_p:"Guangzhou, Foshan, and Zhuhai sit within the Greater Bay Area, linked by high-speed rail and reachable within an hour — giving you room to choose among the region's finest medical resources.",
+    city_gz_t:"Guangzhou", city_gz_p:"South China's medical hub. Home to leading medical schools — Sun Yat-sen, Southern Medical, Jinan — with one of the nation's highest concentrations of top hospitals, internationally renowned in nasopharyngeal cancer, ophthalmology, and organ transplant.",
+    city_fs_t:"Foshan", city_fs_p:"Adjacent to Guangzhou and directly connected by metro. Strong all-round medical strength with standout orthopedics and cardiology, a calmer pace, and more favorable costs.",
+    city_zh_t:"Zhuhai", city_zh_p:"A coastal garden city bordering Hong Kong and Macau. Pleasant and recovery-friendly, with medical resources seamlessly linked to Hong Kong and Macau — ideal for post-op recovery and cross-border care.",
+    care_eyebrow:"Care Areas", care_h:"We excel at the toughest<br>medical challenges", care_p:"Covering oncology, cardiovascular, organ transplant and more.",
+    journey_eyebrow:"How It Works", journey_h:"From first inquiry<br>to a safe journey home", journey_p:"A dedicated medical advisor stays with you at every step — so you can focus on getting better.",
+    j1_t:"Free Assessment", j1_p:"Send us your medical records. Our advisors complete an initial review within 48 hours, with treatment options and cost estimates.",
+    j2_t:"A Tailored Care Plan", j2_p:"We match you with the right hospital and specialist, arrange remote consultations, and assist with visas, flights, and accommodation.",
+    j3_t:"Accompanied Care", j3_p:"A dedicated medical interpreter accompanies every visit, coordinating tests, treatment, and admissions — keeping your family informed.",
+    j4_t:"Recovery & Follow-up", j4_p:"After discharge, we prepare translated medical records and arrange remote follow-ups, in sync with your doctor at home.",
+    cta_h:"Begin your medical journey with confidence", cta_btn:"Free Consultation",
+    contact_eyebrow:"Contact", contact_h:"Start Your Consultation", contact_p:"Leave your details and our medical advisors will reach out within 24 hours.",
+    f_name:"Name", f_name_ph:"Your name", f_contact:"Email / WhatsApp", f_dept:"Department of interest", f_dept_ph:"Please select", f_msg:"Brief description", f_msg_ph:"Briefly describe your condition or needs…", f_submit:"Submit Inquiry",
+    ch_wechat:"WeChat",
+    foot_brand:"Connecting the world to quality healthcare in China. From consultation to recovery, by your side.", foot_service:"Services", foot_patients:"Patient Support", foot_appt:"Consultation", foot_visa:"Visa Assistance", foot_translate:"Record Translation", foot_followup:"Follow-up Care", foot_connect:"Connect",
+    foot_disclaimer:"© 2026 Goolson. This platform provides medical information, healthcare navigation, and communication services. We do not provide diagnostic or treatment advice. All medical decisions are made by licensed physicians."
+  }
+};
+['fr','de','ru'].forEach(l => { if(!I18N[l]) I18N[l] = I18N.en; });
+
+let currentLang = 'zh';
+function setLang(l) {
+  currentLang = l;
+  try { localStorage.setItem('goolson_lang', l); } catch(e){}
+  const t = I18N[l] || I18N.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if(t[k]!==undefined) el.innerHTML = t[k]; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { const k = el.getAttribute('data-i18n-ph'); if(t[k]!==undefined) el.placeholder = t[k]; });
+  const labels = {zh:'中文',en:'EN',fr:'FR',de:'DE',ru:'РУ'};
+  document.getElementById('langLabel').textContent = labels[l]||l;
+  document.querySelectorAll('#langMenu div').forEach(d => { d.classList.toggle('active', d.getAttribute('onclick').includes("'"+l+"'")); });
+  document.documentElement.lang = l==='zh'?'zh-CN':l;
+  syncLangLinks();
+  closeLang();
+}
+function resolveLang(){
+  try {
+    const u = new URLSearchParams(location.search).get('lang');
+    if (u && I18N[u]) return u;
+    const s = localStorage.getItem('goolson_lang');
+    if (s && I18N[s]) return s;
+  } catch(e){}
+  return 'zh';
+}
+function syncLangLinks(){
+  document.querySelectorAll('a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || /^https?:|^mailto:|^tel:/.test(href)) return;
+    try {
+      const url = new URL(href, location.href);
+      if (url.origin !== location.origin) return;
+      url.searchParams.set('lang', currentLang);
+      a.setAttribute('href', url.pathname.split('/').pop() + url.search + url.hash);
+    } catch(e){}
+  });
+}
+function toggleLang(){ document.getElementById('langMenu').classList.toggle('open'); }
+function closeLang(){ document.getElementById('langMenu').classList.remove('open'); }
+document.addEventListener('click', e => { if(!e.target.closest('.lang-wrap')) closeLang(); });
+
+function toggleNav(){ document.getElementById('navLinks').classList.toggle('open'); }
+document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', ()=>document.getElementById('navLinks').classList.remove('open')));
+
+/* ---- hospitals page rendering ---- */
+function cardHTML(h){
+  const lang = currentLang;
+  return '<div class="hosp-card"><img src="'+h.img+'" alt="'+(lang==='zh'?h.name:h.nameEn)+'" loading="lazy"><div class="hosp-info"><h4>'+(lang==='zh'?h.name:h.nameEn)+'</h4><div class="specs">'+(lang==='zh'?h.specs:h.specsEn)+'</div></div></div>';
+}
+let curFilter = '';
+function filterHosp(q){
+  curFilter = (q||'').trim().toLowerCase();
+  const lang = currentLang;
+  const list = !curFilter ? HOSPITALS : HOSPITALS.filter(function(h){ return [h.name,h.nameEn,h.specs,h.specsEn].concat(h.tags).join(' ').toLowerCase().includes(curFilter); });
+  const grid = document.getElementById('hospGrid');
+  const count = document.getElementById('hpCount');
+  if(list.length){
+    grid.innerHTML = list.map(cardHTML).join('');
+    count.textContent = lang==='zh' ? ('\u5171 '+list.length+' \u5bb6\u533b\u9662') : (list.length+' hospital'+(list.length>1?'s':''));
+  } else {
+    grid.innerHTML = '';
+    count.textContent = lang==='zh' ? '\u672a\u627e\u5230\u5339\u914d\u533b\u9662\uff0c\u8bf7\u76f4\u63a5\u8054\u7cfb\u6211\u4eec\u54a8\u8be2\u3002' : 'No match found \u2014 please contact us directly.';
+  }
+}
+function chip(term){ const el=document.getElementById('hpSearch'); el.value=term; filterHosp(term); }
+const _origSetLang = setLang;
+setLang = function(l){ _origSetLang(l); filterHosp(curFilter); };
+const io2 = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); }); }, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(function(el){ io2.observe(el); });
+(function(){
+  const params = new URLSearchParams(location.search);
+  const q = params.get('q') || '';
+  if(q){ document.getElementById('hpSearch').value = q; }
+  curFilter = q.trim().toLowerCase();
+  setLang(resolveLang());  // 应用记忆语言，并触发 filterHosp 渲染
+})();
+</script>
+</body>
+</html>
