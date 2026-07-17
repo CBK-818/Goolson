@@ -381,7 +381,7 @@ function resolveLang(){
     const s = localStorage.getItem('goolson_lang');
     if (s && I18N[s]) return s;
   } catch(e){}
-  return 'zh';
+  return 'en'; // 默认英文，外文用户优先
 }
 /* 给所有站内链接补上 ?lang=，确保跳转后语言不变（file:// 下也能用） */
 function syncLangLinks(){
