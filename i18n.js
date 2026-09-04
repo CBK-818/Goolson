@@ -4,6 +4,7 @@
    ============================================================ */
 const I18N = {
   zh: {
+    tcm_quote:"", tcm_quote_src:"— 《黄帝内经》", tcm_m1_t:"中药调理", tcm_m1_p:"三甲医院中医科辨证开方，与西医治疗同步进行。", tcm_m2_t:"针灸推拿", tcm_m2_p:"术后疼痛、神经与康复领域的经典辅助疗法。", tcm_m3_t:"药膳食疗", tcm_m3_p:"按体质定制的广府汤膳，康复期的温和滋养。", tcm_m4_t:"岭南凉茶", tcm_m4_p:"广州独有的祛湿养生传统，一杯就能感受的岭南日常。",
     nav_about:"关于我们", nav_china:"中国医疗", nav_hospitals:"合作医院", nav_care:"重点科室", nav_contact:"联系我们", nav_cta:"预约咨询",
     hero_eyebrow:"国际医疗专属管家 · GUANGZHOU",
     hero_l1:"多一个选择，", hero_l2:"多一份希望。",
@@ -43,6 +44,7 @@ const I18N = {
     foot_disclaimer:"© 2026 Goolson 谷神。本平台提供医疗信息整理、就医协助与医患沟通服务，不提供诊断或治疗意见。所有医学判断均由执业医师做出。"
   },
   en: {
+    tcm_quote:"The finest physician treats illness before it arises.", tcm_quote_src:"— Huangdi Neijing, The Yellow Emperor's Classic", tcm_m1_t:"Herbal Formulas", tcm_m1_p:"Prescribed by hospital TCM departments, alongside your Western treatment.", tcm_m2_t:"Acupuncture & Tuina", tcm_m2_p:"Time-tested support for post-operative pain, neurology and rehabilitation.", tcm_m3_t:"Medicinal Cuisine", tcm_m3_p:"Cantonese soups tailored to your constitution — gentle nourishment during recovery.", tcm_m4_t:"Lingnan Herbal Tea", tcm_m4_p:"Guangzhou's own wellness tradition, in a single cup.",
     nav_about:"About", nav_china:"Medical in China", nav_hospitals:"Hospitals", nav_care:"Care Areas", nav_contact:"Contact", nav_cta:"Request Consultation",
     hero_eyebrow:"International Medical Concierge · GUANGZHOU",
     hero_l1:"Another Option.", hero_l2:"Another Hope.",
@@ -82,6 +84,7 @@ const I18N = {
     foot_disclaimer:"© 2026 Goolson. This platform provides medical information, healthcare navigation, and communication services. We do not provide diagnostic or treatment advice. All medical decisions are made by licensed physicians."
   },
   ja: {
+    tcm_quote:"上医は未病を治す。", tcm_quote_src:"— 『黄帝内経』", tcm_m1_t:"漢方調理", tcm_m1_p:"病院の中医科が体質に合わせて処方し、西洋医学の治療と並行して行います。", tcm_m2_t:"鍼灸・推拿", tcm_m2_p:"術後の痛み、神経、リハビリ領域で実績ある補助療法。", tcm_m3_t:"薬膳", tcm_m3_p:"体質に合わせた広東式スープで、回復期をやさしく養います。", tcm_m4_t:"嶺南涼茶", tcm_m4_p:"広州ならではの養生の伝統を、一杯で。",
     nav_about:"私たちについて", nav_china:"中国の医療", nav_hospitals:"提携病院", nav_care:"重点診療科", nav_contact:"お問い合わせ", nav_cta:"相談を予約",
     hero_eyebrow:"国際医療コンシェルジュ · GUANGZHOU",
     hero_l1:"もう一つの選択肢を、", hero_l2:"もう一つの希望を。",
@@ -121,6 +124,7 @@ const I18N = {
     foot_disclaimer:"© 2026 Goolson. 当プラットフォームは医療情報の整理、受診支援、医療コミュニケーションのサービスを提供するものであり、診断や治療に関する助言は行いません。すべての医学的判断は資格を持つ医師によって行われます。"
   },
   ko: {
+    tcm_quote:"최고의 의사는 병이 생기기 전에 다스린다.", tcm_quote_src:"— 『황제내경』", tcm_m1_t:"한약 조리", tcm_m1_p:"병원 중의과에서 체질에 맞게 처방하며 서양 의학 치료와 병행합니다.", tcm_m2_t:"침구·추나", tcm_m2_p:"수술 후 통증, 신경, 재활 분야의 검증된 보조 요법.", tcm_m3_t:"약선 식이요법", tcm_m3_p:"체질에 맞춘 광둥식 탕으로 회복기를 부드럽게 보양합니다.", tcm_m4_t:"링난 량차", tcm_m4_p:"광저우 고유의 양생 전통을 한 잔에.",
     nav_about:"회사 소개", nav_china:"중국 의료", nav_hospitals:"협력 병원", nav_care:"중점 진료과", nav_contact:"문의하기", nav_cta:"상담 예약",
     hero_eyebrow:"국제 의료 컨시어지 · GUANGZHOU",
     hero_l1:"또 하나의 선택,", hero_l2:"또 하나의 희망.",
@@ -160,6 +164,7 @@ const I18N = {
     foot_disclaimer:"© 2026 Goolson. 본 플랫폼은 의료 정보 정리, 진료 지원 및 의료 커뮤니케이션 서비스를 제공하며, 진단이나 치료에 대한 의견은 제공하지 않습니다. 모든 의학적 판단은 면허를 소지한 의사가 내립니다."
   },
   th: {
+    tcm_quote:"แพทย์ที่ดีที่สุดรักษาโรคก่อนที่จะเกิด", tcm_quote_src:"— หวงตี้เน่ยจิง", tcm_m1_t:"ยาสมุนไพรจีน", tcm_m1_p:"สั่งจ่ายโดยแผนกแพทย์แผนจีนของโรงพยาบาล ควบคู่กับการรักษาแผนปัจจุบัน", tcm_m2_t:"ฝังเข็มและทุยหนา", tcm_m2_p:"การบำบัดเสริมที่ได้ผลสำหรับอาการปวดหลังผ่าตัด ระบบประสาท และการฟื้นฟู", tcm_m3_t:"อาหารบำบัด", tcm_m3_p:"ซุปกวางตุ้งปรับตามธาตุร่างกาย บำรุงอย่างอ่อนโยนในช่วงพักฟื้น", tcm_m4_t:"ชาสมุนไพรหลิงหนาน", tcm_m4_p:"ประเพณีดูแลสุขภาพเฉพาะของกว่างโจว ในชาเพียงแก้วเดียว",
     nav_about:"เกี่ยวกับเรา", nav_china:"การแพทย์ในจีน", nav_hospitals:"โรงพยาบาลพันธมิตร", nav_care:"สาขาการรักษาหลัก", nav_contact:"ติดต่อเรา", nav_cta:"นัดหมายปรึกษา",
     hero_eyebrow:"เมดิคัลคอนเซียร์จระหว่างประเทศ · GUANGZHOU",
     hero_l1:"อีกหนึ่งทางเลือก", hero_l2:"อีกหนึ่งความหวัง",
@@ -199,6 +204,7 @@ const I18N = {
     foot_disclaimer:"© 2026 Goolson แพลตฟอร์มนี้ให้บริการรวบรวมข้อมูลทางการแพทย์ ช่วยเหลือการเข้ารับการรักษา และการสื่อสารระหว่างแพทย์กับผู้ป่วย ไม่ได้ให้คำวินิจฉัยหรือคำแนะนำการรักษา การตัดสินใจทางการแพทย์ทั้งหมดกระทำโดยแพทย์ผู้มีใบอนุญาต"
   },
   vi: {
+    tcm_quote:"Thầy thuốc giỏi nhất chữa bệnh từ khi chưa phát.", tcm_quote_src:"— Hoàng Đế Nội Kinh", tcm_m1_t:"Thuốc Đông y", tcm_m1_p:"Do khoa Trung y của bệnh viện kê đơn theo thể trạng, song song với điều trị Tây y.", tcm_m2_t:"Châm cứu & xoa bóp", tcm_m2_p:"Liệu pháp hỗ trợ đã được kiểm chứng cho đau sau mổ, thần kinh và phục hồi chức năng.", tcm_m3_t:"Dược thiện", tcm_m3_p:"Canh Quảng Đông theo thể trạng — bồi bổ nhẹ nhàng trong thời gian hồi phục.", tcm_m4_t:"Trà thảo mộc Lĩnh Nam", tcm_m4_p:"Truyền thống dưỡng sinh riêng của Quảng Châu, trong một tách trà.",
     nav_about:"Về chúng tôi", nav_china:"Y tế Trung Quốc", nav_hospitals:"Bệnh viện đối tác", nav_care:"Chuyên khoa trọng điểm", nav_contact:"Liên hệ", nav_cta:"Đặt lịch tư vấn",
     hero_eyebrow:"Concierge y tế quốc tế · GUANGZHOU",
     hero_l1:"Thêm một lựa chọn,", hero_l2:"thêm một hy vọng.",
@@ -238,6 +244,7 @@ const I18N = {
     foot_disclaimer:"© 2026 Goolson. Nền tảng này cung cấp dịch vụ tổng hợp thông tin y tế, hỗ trợ khám chữa bệnh và kết nối giao tiếp giữa bác sĩ và bệnh nhân; không đưa ra ý kiến chẩn đoán hay điều trị. Mọi quyết định y khoa đều do bác sĩ có chứng chỉ hành nghề đưa ra."
   },
   fr: {
+    tcm_quote:"Le meilleur médecin traite la maladie avant qu'elle n'apparaisse.", tcm_quote_src:"— Huangdi Neijing, Classique interne de l'Empereur Jaune", tcm_m1_t:"Formules à base de plantes", tcm_m1_p:"Prescrites par les services de MTC hospitaliers, en parallèle du traitement occidental.", tcm_m2_t:"Acupuncture & tuina", tcm_m2_p:"Un soutien éprouvé contre la douleur post-opératoire, en neurologie et en rééducation.", tcm_m3_t:"Cuisine médicinale", tcm_m3_p:"Soupes cantonaises adaptées à votre constitution — une nutrition douce pendant la convalescence.", tcm_m4_t:"Tisanes du Lingnan", tcm_m4_p:"La tradition de bien-être propre à Guangzhou, en une seule tasse.",
     nav_about:"À propos", nav_china:"Se soigner en Chine", nav_hospitals:"Hôpitaux partenaires", nav_care:"Spécialités clés", nav_contact:"Contact", nav_cta:"Demander une consultation",
     hero_eyebrow:"Conciergerie médicale internationale · GUANGZHOU",
     hero_l1:"Une autre option,", hero_l2:"un autre espoir.",
@@ -277,6 +284,7 @@ const I18N = {
     foot_disclaimer:"© 2026 Goolson. Cette plateforme propose des services d'information médicale, d'orientation dans le parcours de soins et de facilitation de la communication médecin-patient. Elle ne fournit aucun avis diagnostique ou thérapeutique. Toutes les décisions médicales relèvent de médecins diplômés."
   },
   de: {
+    tcm_quote:"Der beste Arzt behandelt die Krankheit, bevor sie entsteht.", tcm_quote_src:"— Huangdi Neijing, Klassiker des Gelben Kaisers", tcm_m1_t:"Kräuterrezepturen", tcm_m1_p:"Von den TCM-Abteilungen der Kliniken verordnet, parallel zur westlichen Behandlung.", tcm_m2_t:"Akupunktur & Tuina", tcm_m2_p:"Bewährte Begleittherapie bei postoperativen Schmerzen, Neurologie und Rehabilitation.", tcm_m3_t:"Heilküche", tcm_m3_p:"Kantonesische Suppen nach Ihrer Konstitution – sanfte Kräftigung in der Genesung.", tcm_m4_t:"Lingnan-Kräutertee", tcm_m4_p:"Guangzhous eigene Gesundheitstradition – in einer Tasse.",
     nav_about:"Über uns", nav_china:"Medizin in China", nav_hospitals:"Partnerkliniken", nav_care:"Schwerpunkte", nav_contact:"Kontakt", nav_cta:"Beratung anfragen",
     hero_eyebrow:"Internationaler medizinischer Concierge · GUANGZHOU",
     hero_l1:"Eine weitere Option.", hero_l2:"Eine weitere Hoffnung.",
@@ -316,6 +324,7 @@ const I18N = {
     foot_disclaimer:"© 2026 Goolson. Diese Plattform bietet medizinische Informationsaufbereitung, Behandlungsbegleitung und Kommunikationsservices. Wir erteilen keine Diagnose- oder Therapieempfehlungen. Alle medizinischen Entscheidungen treffen approbierte Ärztinnen und Ärzte."
   },
   ru: {
+    tcm_quote:"Лучший врач лечит болезнь до того, как она возникла.", tcm_quote_src:"— «Хуанди нэйцзин», Трактат Жёлтого императора", tcm_m1_t:"Травяные сборы", tcm_m1_p:"Назначаются отделениями ТКМ клиник параллельно с западным лечением.", tcm_m2_t:"Иглоукалывание и туйна", tcm_m2_p:"Проверенная поддержка при послеоперационной боли, в неврологии и реабилитации.", tcm_m3_t:"Лечебная кухня", tcm_m3_p:"Кантонские супы по вашей конституции — мягкое восстановление сил.", tcm_m4_t:"Травяной чай Линнань", tcm_m4_p:"Собственная оздоровительная традиция Гуанчжоу — в одной чашке.",
     nav_about:"О нас", nav_china:"Медицина в Китае", nav_hospitals:"Клиники-партнёры", nav_care:"Ключевые направления", nav_contact:"Контакты", nav_cta:"Записаться на консультацию",
     hero_eyebrow:"Международный медицинский консьерж · GUANGZHOU",
     hero_l1:"Ещё один вариант.", hero_l2:"Ещё одна надежда.",
@@ -364,7 +373,7 @@ function setLang(l) {
   currentLang = l;
   try { localStorage.setItem('goolson_lang', l); } catch(e){}
   const t = I18N[l] || I18N.en;
-  document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if(t[k]!==undefined) el.innerHTML = t[k]; });
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); const v = t[k]!==undefined ? t[k] : I18N.en[k]; if(v!==undefined) el.innerHTML = v; });
   document.querySelectorAll('[data-i18n-ph]').forEach(el => { const k = el.getAttribute('data-i18n-ph'); if(t[k]!==undefined) el.placeholder = t[k]; });
   document.getElementById('langLabel').textContent = LANG_LABELS[l] || l;
   document.querySelectorAll('#langMenu div').forEach(d => { d.classList.toggle('active', d.getAttribute('onclick').includes("'"+l+"'")); });
